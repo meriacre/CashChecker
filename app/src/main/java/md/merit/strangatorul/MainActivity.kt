@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         viewTransactions()
 
+
         addItem.setOnClickListener{
     val intent = Intent(this, AddItemActivity::class.java)
     startActivity(intent)
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         viewTransactions()
         super.onResume()
+        edtRest.setText(returnRest().toString())
     }
 
 private fun viewTransactions(){
@@ -38,5 +40,16 @@ private fun viewTransactions(){
     rv.layoutManager = LinearLayoutManager(this)
     rv.adapter = adapter
 }
+
+    private fun returnRest(): Double {
+        val sumTransactions = dbHandler.returnSumPrice()
+        var totalMoney: Double
+        if(edtTotal.text.toString().equals(""))
+            totalMoney =0.0
+        else
+            totalMoney = edtTotal.text.toString().toDouble()
+        var rest = totalMoney - sumTransactions
+        return rest
+    }
 
 }

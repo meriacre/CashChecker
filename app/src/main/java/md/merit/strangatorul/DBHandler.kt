@@ -2,6 +2,7 @@ package md.merit.strangatorul
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
@@ -106,5 +107,20 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
             result = false
         }
         return result
+    }
+
+    fun returnSumPrice(): Double {
+        val qry = "Select Sum($COLUMN_TRANSACTIONPRICE) From $TRASACTION_TABLE_NAME"
+        val db = this.writableDatabase
+        var result: Double = 0.0
+        val cursor = db.rawQuery(qry, null)
+        if (cursor.moveToFirst()){
+            result = cursor.getDouble(0)
+        }
+        while (cursor.moveToNext())
+            return result
+        cursor.close()
+        db.close()
+    return result
     }
 }
