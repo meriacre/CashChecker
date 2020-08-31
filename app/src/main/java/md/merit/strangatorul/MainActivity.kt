@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         editor.apply(){
             putString("STRING_KEY", insertedValue)
         }.apply()
-        
+
         Toast.makeText(this, "Your amount of money are saved!", Toast.LENGTH_SHORT).show()
     }
 
