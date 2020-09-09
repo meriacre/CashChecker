@@ -63,14 +63,13 @@ class MainActivity : AppCompatActivity() {
         val inflater = layoutInflater
         builder.setTitle("Please write your money amount!")
         val dialogLayout = inflater.inflate(R.layout.lo_add_money, null)
-        val editText = dialogLayout.findViewById<EditText>(R.id.edtTotalMoney)
+        dialogLayout.findViewById<EditText>(R.id.edtTotalMoney)
 
         builder.setView(dialogLayout)
         builder.setIcon(R.drawable.ic_baseline_attach_money_24)
         builder.setPositiveButton("OK") { dialogInterface, i ->
             try {
-                val a = dialogLayout.edtTotalMoney.text.toString()
-                edtTotal.text = a
+                edtTotal.text = dialogLayout.edtTotalMoney.text.toString()
                 saveData()
                 val intent = intent
                 finish()
