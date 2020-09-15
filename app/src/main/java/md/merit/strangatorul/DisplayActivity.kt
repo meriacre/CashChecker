@@ -18,13 +18,14 @@ class DisplayActivity : AppCompatActivity() {
         var aTitle = intent.getStringExtra("iTitle")
         var aDescription = intent.getStringExtra("iDesc")
         var aPrice = intent.getDoubleExtra("iPrice", 0.0)
+        var aDate = intent.getStringExtra("iDate")
 
         actionBar.setTitle(aTitle)
 
         tvNameDisplay.text = aTitle
         tvDescriptionDisplay.text = aDescription
         tvPriceDisplay.text = aPrice.toString()
-
+        tvDateDisplay.text = aDate.toString()
     }
 
 }

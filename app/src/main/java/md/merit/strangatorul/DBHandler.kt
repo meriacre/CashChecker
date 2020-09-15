@@ -14,13 +14,14 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
 
     companion object{
         private val DATABASE_NAME = "MyData.db"
-        private val DATABASE_VERSION = 1
+        private val DATABASE_VERSION = 2
 
         val TRASACTION_TABLE_NAME = "Transactions"
         val COLUMN_TRANSACTIONID = "tansactionid"
         val COLUMN_TRANSACTIONNAME = "tansactionname"
         val COLUMN_TRANSACTIONDESCRIPTION = "tansactiondescription"
         val COLUMN_TRANSACTIONPRICE = "tansactionprice"
+        val COLUMN_TRANSACTIONDATE = "transactiondate"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -33,7 +34,11 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("Not yet implemented")
+       if (p1<2)
+       {
+           p0?.execSQL("Alter Table $TRASACTION_TABLE_NAME " +
+           "Add $COLUMN_TRANSACTIONDATE TEXT NULL")
+       }
     }
 
     fun getTransactions(context: Context) : ArrayList<ExampleItem> {
@@ -53,6 +58,7 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
                     COLUMN_TRANSACTIONDESCRIPTION))
                 transaction.itemPrice = cursor.getDouble(cursor.getColumnIndex(
                     COLUMN_TRANSACTIONPRICE))
+                transaction.itemDate = cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONDATE))
                 transactions.add(transaction)
                 cursor.moveToNext()
             }
@@ -68,6 +74,7 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
         values.put(COLUMN_TRANSACTIONNAME, item.itemName)
         values.put(COLUMN_TRANSACTIONDESCRIPTION, item.itemDescription)
         values.put(COLUMN_TRANSACTIONPRICE, item.itemPrice)
+        values.put(COLUMN_TRANSACTIONDATE, item.itemDate)
         val db = this.writableDatabase
         try {
             db.insert(TRASACTION_TABLE_NAME, null, values)
@@ -92,13 +99,14 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
         return result
     }
 
-    fun updateTransaction(id: String, transactionName: String, transactionDescription: String, transactionPrice: String) : Boolean{
+    fun updateTransaction(id: String, transactionName: String, transactionDescription: String, transactionPrice: String, transactionDate: String) : Boolean{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         var result = false
         contentValues.put(COLUMN_TRANSACTIONNAME, transactionName)
         contentValues.put(COLUMN_TRANSACTIONDESCRIPTION, transactionDescription)
         contentValues.put(COLUMN_TRANSACTIONPRICE, transactionPrice.toDouble())
+        contentValues.put(COLUMN_TRANSACTIONDATE, transactionDate)
         try {
             db.update(TRASACTION_TABLE_NAME, contentValues, "$COLUMN_TRANSACTIONID = ?", arrayOf(id))
             result = true

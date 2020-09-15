@@ -4,7 +4,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="78dp"
         android:layout_margin="4dp"
         android:padding="8dp">
 
@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="160dp"
+            android:layout_width="161dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/indexNumber"
@@ -31,9 +31,9 @@
             android:layout_width="85dp"
             android:layout_height="35dp"
             android:layout_toEndOf="@+id/name"
-            android:textAlignment="center"
             android:autoSizeTextType="uniform"
             android:text="1000"
+            android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="italic" />
 
@@ -54,6 +54,18 @@
             android:layout_toEndOf="@+id/btnEdit"
             android:backgroundTint="#FFFFFF"
             android:src="@drawable/ic_delete" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/indexNumber"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="102dp"
+            android:layout_marginEnd="174dp"
+            android:layout_marginBottom="8dp"
+            android:text="TextView" />
 
 
     </RelativeLayout>

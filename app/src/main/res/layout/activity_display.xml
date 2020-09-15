@@ -27,11 +27,21 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNameDisplay" />
 
     <TextView
-        android:hint="Transaction Price"
         android:id="@+id/tvPriceDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:hint="Transaction Price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDateDisplay" />
+
+    <TextView
+        android:id="@+id/tvDateDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDisplay" />

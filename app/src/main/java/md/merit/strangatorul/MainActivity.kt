@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun viewTransactions() {
         val transactionList = dbHandler.getTransactions(this)
-        val adapter = MyAdapter(this, transactionList)
+        transactionList
+        val adapter = MyAdapter(this, transactionList.reversed() as ArrayList<ExampleItem>)
         val rv: RecyclerView = findViewById(R.id.recycler_view)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
