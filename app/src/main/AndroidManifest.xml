@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".DisplayActivity" android:parentActivityName=".MainActivity">
 
             <meta-data
@@ -24,6 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddItemActivity" />
+
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

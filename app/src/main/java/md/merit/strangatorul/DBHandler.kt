@@ -131,4 +131,9 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
         db.close()
     return result
     }
+
+    fun deleteAllData(){
+       val db = this.writableDatabase
+        db.execSQL("Delete From $TRASACTION_TABLE_NAME")
+    }
 }

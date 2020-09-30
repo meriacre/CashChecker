@@ -11,4 +11,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="adding_transactions">Adding Transactions</string>
+    <string name="name"><u>Name</u>:</string>
+    <string name="description"><u>Description</u>:</string>
+    <string name="date"><u>Date</u>:</string>
+    <string name="price"><u>Price</u>:</string>
 </resources>

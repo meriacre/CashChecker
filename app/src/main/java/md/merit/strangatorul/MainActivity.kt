@@ -1,8 +1,12 @@
 package md.merit.strangatorul
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -12,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lo_add_money.view.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +38,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.resetApp -> {
+                var alertDialog = android.app.AlertDialog.Builder(this)
+                    .setTitle("Warning")
+                    .setMessage("Are you sure you want to delete all data?")
+                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                        try {dbHandler.deleteAllData()
+
+                        } catch (e:Exception){
+                            Toast.makeText(this, "Unable to delete data", Toast.LENGTH_SHORT).show()
+                        }
+                        val intent = intent
+                        finish()
+                        startActivity(intent)
+                            Toast.makeText(this, "All data was deleted", Toast.LENGTH_SHORT).show()
+                    })
+                    .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which -> })
+                    .setIcon(R.drawable.ic_baseline_warning_24)
+                    .show()
+            }
+            R.id.aboutApp -> Toast.makeText(this, "aboutt what?", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onResume() {
         viewTransactions()
@@ -42,11 +77,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun viewTransactions() {
         val transactionList = dbHandler.getTransactions(this)
-        transactionList
-        val adapter = MyAdapter(this, transactionList.reversed() as ArrayList<ExampleItem>)
-        val rv: RecyclerView = findViewById(R.id.recycler_view)
-        rv.layoutManager = LinearLayoutManager(this)
-        rv.adapter = adapter
+        if(transactionList != null) {
+            if (transactionList.size > 1) {
+                val adapter = MyAdapter(this, transactionList.reversed() as ArrayList<ExampleItem>)
+                val rv: RecyclerView = findViewById(R.id.recycler_view)
+                rv.layoutManager = LinearLayoutManager(this)
+                rv.adapter = adapter
+            } else {
+                val adapter = MyAdapter(this, transactionList)
+                val rv: RecyclerView = findViewById(R.id.recycler_view)
+                rv.layoutManager = LinearLayoutManager(this)
+                rv.adapter = adapter
+            }
+        }
+
     }
 
     private fun returnRest(): Double {
@@ -84,6 +128,7 @@ class MainActivity : AppCompatActivity() {
         }
         builder.show()
     }
+
 
     private fun saveData(){
         val insertedValue = edtTotal.text.toString()

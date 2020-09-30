@@ -11,11 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.add_item.*
 import kotlinx.android.synthetic.main.example_item.view.*
 import kotlinx.android.synthetic.main.lo_transaction_update.view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
@@ -68,6 +66,8 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
                     } else
 
                         Toast.makeText(context, "Error deleting", Toast.LENGTH_SHORT).show()
+                    val i1 = Intent(context, MainActivity::class.java)
+                    context.startActivity(i1)
                 })
                 .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which -> })
                 .setIcon(R.drawable.ic_baseline_warning_24)
@@ -123,6 +123,8 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
                     } else {
                         Toast.makeText(context, "Error updating", Toast.LENGTH_SHORT).show()
                     }
+                    val i1 = Intent(context, MainActivity::class.java)
+                    context.startActivity(i1)
                 })
                 .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialogInterface, i ->
 
