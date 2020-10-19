@@ -22,10 +22,10 @@ class DisplayActivity : AppCompatActivity() {
 
         actionBar.setTitle(aTitle)
 
-        tvNameDisplay.text = aTitle
-        tvDescriptionDisplay.text = aDescription
-        tvPriceDisplay.text = aPrice.toString()
-        tvDateDisplay.text = aDate.toString()
+        tv_name_display.text = aTitle
+        tv_description_display.text = aDescription
+        tv_price_display.text = aPrice.toString()
+        tv_date_display.text = aDate.toString()
     }
 
 }

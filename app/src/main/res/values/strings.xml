@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Strangatorul</string>
-    <string name="denumire">Scrie aici denumirea</string>
+    <string name="denumire">write name here!</string>
     <string name="title_activity_main_activitytest">MainActivitytest</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -11,8 +11,26 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="adding_transactions">Adding Transactions</string>
-    <string name="name"><u>Name</u>:</string>
     <string name="description"><u>Description</u>:</string>
     <string name="date"><u>Date</u>:</string>
     <string name="price"><u>Price</u>:</string>
+    <string name="cumparaturi">Cumparaturi</string>
+    <string name="_100">100</string>
+    <string name="_1000">1000</string>
+    <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
+    <string name="total">TOTAL:</string>
+    <string name="rest">REST:</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="title"><u>Title:</u></string>
+    <string name="write_your_description_here">write description here!</string>
+    <string name="press_right_button_to_select_date">please select date!</string>
+    <string name="write_price_here">write price here!</string>
+    <string name="_00_11_2222">00/11/2222</string>
+    <string name="transaction_name">Transaction Name</string>
+    <string name="transaction_description">This transaction description is empty.</string>
+    <string name="_0">0</string>
+    <string name="dolar">$</string>
+    <string name="write_here_your_total_cash">Write here your total cash!</string>
 </resources>

@@ -2,15 +2,18 @@ package md.merit.strangatorul
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
 import kotlin.Exception
 
-class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.CursorFactory?, version : Int) :
-    SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
+class DBHandler(
+    context: Context,
+    name : String?,
+    factory : SQLiteDatabase.CursorFactory?,
+    version : Int
+) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     companion object{
         private val DATABASE_NAME = "MyData.db"
@@ -41,19 +44,19 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
        }
     }
 
-    fun getTransactions(context: Context) : ArrayList<ExampleItem> {
+    fun getTransactions(context: Context) : ArrayList<Transaction> {
         val qry = "Select * From $TRASACTION_TABLE_NAME"
         val db = this.readableDatabase
         val cursor = db.rawQuery(qry, null)
-        val transactions = ArrayList<ExampleItem>()
+        val transactions = ArrayList<Transaction>()
 
         if (cursor.count == 0)
             Toast.makeText(context, "No records found", Toast.LENGTH_SHORT).show() else{
             cursor.moveToFirst()
             while (!cursor.isAfterLast){
-                val transaction = ExampleItem()
-                transaction.itemNumber = cursor.getInt(cursor.getColumnIndex(COLUMN_TRANSACTIONID))
-                transaction.itemName = cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONNAME))
+                val transaction = Transaction()
+                transaction.itemId = cursor.getInt(cursor.getColumnIndex(COLUMN_TRANSACTIONID))
+                transaction.itemTitle = cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONNAME))
                 transaction.itemDescription = cursor.getString(cursor.getColumnIndex(
                     COLUMN_TRANSACTIONDESCRIPTION))
                 transaction.itemPrice = cursor.getDouble(cursor.getColumnIndex(
@@ -69,9 +72,9 @@ class DBHandler(context: Context, name : String?, factory : SQLiteDatabase.Curso
         return transactions
     }
 
-    fun addTransaction(context: Context, item: ExampleItem){
+    fun addTransaction(context: Context, item: Transaction){
         val values = ContentValues()
-        values.put(COLUMN_TRANSACTIONNAME, item.itemName)
+        values.put(COLUMN_TRANSACTIONNAME, item.itemTitle)
         values.put(COLUMN_TRANSACTIONDESCRIPTION, item.itemDescription)
         values.put(COLUMN_TRANSACTIONPRICE, item.itemPrice)
         values.put(COLUMN_TRANSACTIONDATE, item.itemDate)

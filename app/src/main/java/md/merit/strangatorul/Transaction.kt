@@ -1,7 +1,7 @@
 package md.merit.strangatorul
 
-class ExampleItem(var itemNumber: Int = 0,
-                  var itemName: String? = "",
+class Transaction(var itemId: Int = 0,
+                  var itemTitle: String? = "",
                   var itemDescription: String? = "",
                   var itemPrice: Double? = 0.0,
                   var itemDate: String? = "")

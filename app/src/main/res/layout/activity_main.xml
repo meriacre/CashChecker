@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@+id/addItem"
+    android:layout_above="@+id/btn_add_item"
     tools:context=".MainActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="TOTAL:"
+            android:text="@string/total"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,21 +49,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:text="REST:"
+            android:text="@string/rest"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/edtRest"
+            app:layout_constraintEnd_toStartOf="@+id/edt_rest"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.48000002" />
 
         <TextView
-            android:id="@+id/edtTotal"
+            android:id="@+id/edt_total"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:backgroundTint="#7EC629"
             android:gravity="center_vertical"
             android:fontFamily="serif-monospace"
-            android:text="0"
+            android:text="@string/_0"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,15 +71,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/edtRest"
+            android:id="@+id/edt_rest"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="#7EC629"
-            android:gravity="center_vertical"
             android:enabled="false"
-            android:text="0"
             android:fontFamily="serif-monospace"
+            android:gravity="center_vertical"
+            android:text="@string/_0"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -91,12 +91,12 @@
             android:layout_height="40dp"
             android:onClick="addMoney"
             android:src="@drawable/ic_baseline_attach_money_24"
-            app:layout_constraintStart_toEndOf="@+id/edtTotal"
-            app:layout_constraintTop_toTopOf="@+id/edtTotal" />
+            app:layout_constraintStart_toEndOf="@+id/edt_total"
+            app:layout_constraintTop_toTopOf="@+id/edt_total" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
-        android:id="@+id/addItem"
+        android:id="@+id/btn_add_item"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginBottom="15dp"

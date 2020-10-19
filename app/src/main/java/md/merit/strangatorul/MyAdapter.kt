@@ -8,6 +8,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.example_item.view.*
 import kotlinx.android.synthetic.main.lo_transaction_update.view.*
 import java.util.*
 
-class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem>) :
+class MyAdapter(context: Context, private val exampleList: ArrayList<Transaction>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     val context = context
@@ -30,16 +31,16 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
         val curentItem = exampleList[position]
         val n = position + 1
         holder.itemNumber.text = n.toString()
-        holder.itemName.text = curentItem.itemName
+        holder.itemName.text = curentItem.itemTitle
         holder.itemPrice.text = curentItem.itemPrice.toString()
         holder.itemDate.text = curentItem.itemDate.toString()
 
         holder.itemView.setOnClickListener {
-            val exampleItem = exampleList.get(position)
-            var gTitle = exampleItem.itemName
-            var gDescription = exampleItem.itemDescription
-            var gPrice = exampleItem.itemPrice
-            var gDate = exampleItem.itemDate
+            val gItem = exampleList.get(position)
+            var gTitle = gItem.itemTitle
+            var gDescription = gItem.itemDescription
+            var gPrice = gItem.itemPrice
+            var gDate = gItem.itemDate
 
             val intent = Intent(context, DisplayActivity::class.java)
             intent.putExtra("iTitle", gTitle)
@@ -51,13 +52,13 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
         }
 
         holder.btnDelete.setOnClickListener {
-            val itemName = curentItem.itemName
+            val itemName = curentItem.itemTitle
 
             var alertDialog = AlertDialog.Builder(context)
                 .setTitle("Warning")
                 .setMessage("Are you sure you want to delete $itemName")
                 .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
-                    if (MainActivity.dbHandler.deleteTransaction(curentItem.itemNumber)) {
+                    if (MainActivity.dbHandler.deleteTransaction(curentItem.itemId)) {
                         exampleList.removeAt(position)
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, exampleList.size)
@@ -79,12 +80,12 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
             val inflater = LayoutInflater.from(context)
             val view = inflater.inflate(R.layout.lo_transaction_update, null)
 
-            val txtName = view.findViewById<TextView>(R.id.edtName2)
-            val txtDescription = view.findViewById<TextView>(R.id.edtDescription2)
-            val txtPrice = view.findViewById<TextView>(R.id.edtPrice2)
-            val txtDate = view.findViewById<TextView>(R.id.edt_DateUpdate)
+            val txtName = view.findViewById<TextView>(R.id.edt_name_update)
+            val txtDescription = view.findViewById<TextView>(R.id.edt_description_update)
+            val txtPrice = view.findViewById<TextView>(R.id.edt_price_update)
+            val txtDate = view.findViewById<TextView>(R.id.edt_date_update)
 
-            txtName.text = curentItem.itemName
+            txtName.text = curentItem.itemTitle
             txtDescription.text = curentItem.itemDescription
             txtPrice.text = curentItem.itemPrice.toString()
             txtDate.text = curentItem.itemDate
@@ -98,7 +99,7 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
             view.btn_calendarEdit.setOnClickListener {
                 val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
                     var correctMonth = mMonth + 1
-                    view.edt_DateUpdate.setText(""+ mDay +"/" + correctMonth + "/" + mYear)
+                    view.edt_date_update.setText(""+ mDay +"/" + correctMonth + "/" + mYear)
                 }, year, month, day)
                 dpd.show()
             }
@@ -107,17 +108,17 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
                 .setView(view)
                 .setPositiveButton("Update", DialogInterface.OnClickListener { dialog, which ->
                     val isUpdate = MainActivity.dbHandler.updateTransaction(
-                        curentItem.itemNumber.toString(),
-                        view.edtName2.text.toString(),
-                        view.edtDescription2.text.toString(),
-                        view.edtPrice2.text.toString(),
-                        view.edt_DateUpdate.text.toString()
+                        curentItem.itemId.toString(),
+                        view.edt_name_update.text.toString(),
+                        view.edt_description_update.text.toString(),
+                        view.edt_price_update.text.toString(),
+                        view.edt_date_update.text.toString()
                     )
                     if (isUpdate == true) {
-                        exampleList[position].itemName = view.edtName2.text.toString()
-                        exampleList[position].itemDescription = view.edtDescription2.text.toString()
-                        exampleList[position].itemPrice = view.edtPrice2.text.toString().toDouble()
-                        exampleList[position].itemDate = view.edt_DateUpdate.text.toString()
+                        exampleList[position].itemTitle = view.edt_name_update.text.toString()
+                        exampleList[position].itemDescription = view.edt_description_update.text.toString()
+                        exampleList[position].itemPrice = view.edt_price_update.text.toString().toDouble()
+                        exampleList[position].itemDate = view.edt_date_update.text.toString()
                         notifyDataSetChanged()
                         Toast.makeText(context, "Updated succesfully!", Toast.LENGTH_SHORT).show()
                     } else {
@@ -139,13 +140,13 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<ExampleItem
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemNumber: TextView = itemView.indexNumber
-        val itemName: TextView = itemView.name
-        val itemPrice: TextView = itemView.price
-        val itemDate: TextView = itemView.date
+        val itemNumber: TextView = itemView.tv_id
+        val itemName: TextView = itemView.tv_transaction_name
+        val itemPrice: TextView = itemView.tv_price
+        val itemDate: TextView = itemView.tv_date
 
-        val btnEdit = itemView.btnEdit
-        val btnDelete = itemView.btnDelete
+        val btnEdit: ImageButton = itemView.btn_edit
+        val btnDelete: ImageButton = itemView.btn_delete
     }
 
 }

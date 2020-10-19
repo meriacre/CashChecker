@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         viewTransactions()
        loadData()
 
-        addItem.setOnClickListener {
+        btn_add_item.setOnClickListener {
             val intent = Intent(this, AddItemActivity::class.java)
             startActivity(intent)
         }
@@ -72,20 +71,20 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         viewTransactions()
         super.onResume()
-        edtRest.setText(returnRest().toString())
+        edt_rest.setText(returnRest().toString())
     }
 
     private fun viewTransactions() {
         val transactionList = dbHandler.getTransactions(this)
         if(transactionList != null) {
             if (transactionList.size > 1) {
-                val adapter = MyAdapter(this, transactionList.reversed() as ArrayList<ExampleItem>)
-                val rv: RecyclerView = findViewById(R.id.recycler_view)
+                val adapter = MyAdapter(this, transactionList.reversed() as ArrayList<Transaction>)
+                val rv: RecyclerView = findViewById(R.id.recycler_view_main)
                 rv.layoutManager = LinearLayoutManager(this)
                 rv.adapter = adapter
             } else {
                 val adapter = MyAdapter(this, transactionList)
-                val rv: RecyclerView = findViewById(R.id.recycler_view)
+                val rv: RecyclerView = findViewById(R.id.recycler_view_main)
                 rv.layoutManager = LinearLayoutManager(this)
                 rv.adapter = adapter
             }
@@ -96,10 +95,10 @@ class MainActivity : AppCompatActivity() {
     private fun returnRest(): Double {
         val sumTransactions = dbHandler.returnSumPrice()
         var totalMoney: Double
-        if (edtTotal.text.toString().equals(""))
+        if (edt_total.text.toString().equals(""))
             totalMoney = 0.0
         else
-            totalMoney = edtTotal.text.toString().toDouble()
+            totalMoney = edt_total.text.toString().toDouble()
         return totalMoney - sumTransactions
     }
 
@@ -108,13 +107,13 @@ class MainActivity : AppCompatActivity() {
         val inflater = layoutInflater
         builder.setTitle("Please write your money amount!")
         val dialogLayout = inflater.inflate(R.layout.lo_add_money, null)
-        dialogLayout.findViewById<EditText>(R.id.edtTotalMoney)
+        dialogLayout.findViewById<EditText>(R.id.edt_total_money)
 
         builder.setView(dialogLayout)
         builder.setIcon(R.drawable.ic_baseline_attach_money_24)
         builder.setPositiveButton("OK") { dialogInterface, i ->
             try {
-                edtTotal.text = dialogLayout.edtTotalMoney.text.toString()
+                edt_total.text = dialogLayout.edt_total_money.text.toString()
                 saveData()
                 val intent = intent
                 finish()
@@ -131,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun saveData(){
-        val insertedValue = edtTotal.text.toString()
+        val insertedValue = edt_total.text.toString()
 
         val sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
@@ -145,7 +144,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadData(){
         val sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val savedString = sharedPref.getString("STRING_KEY",null)
-        edtTotal.text = savedString
+        edt_total.text = savedString
     }
 
 }

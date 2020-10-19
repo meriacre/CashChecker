@@ -5,12 +5,13 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edtTotalMoney"
+        android:id="@+id/edt_total_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="numberDecimal"
-        />
+        android:autofillHints=""
+        android:hint="@string/write_here_your_total_cash"
+        android:inputType="numberDecimal" />
 
 </LinearLayout>

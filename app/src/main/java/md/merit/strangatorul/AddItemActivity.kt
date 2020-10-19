@@ -21,37 +21,37 @@ class AddItemActivity : AppCompatActivity() {
         btnCalendar.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
                 var correctMonth = mMonth + 1
-                tv_addDate.setText(""+ mDay +"/" + correctMonth + "/" + mYear)
+                tv_add_date.setText(""+ mDay +"/" + correctMonth + "/" + mYear)
             }, year, month, day)
             dpd.show()
         }
 
-        btnSave.setOnClickListener{
-            if(edtDenumirea.text.isEmpty()){
+        btn_save.setOnClickListener{
+            if(edt_add_name.text.isEmpty()){
                 Toast.makeText(this, "Please enter transaction name!", Toast.LENGTH_SHORT).show()
-                edtDenumirea.requestFocus()
+                edt_add_name.requestFocus()
             } else{
-                val transaction = ExampleItem()
-                transaction.itemName = edtDenumirea.text.toString()
-                transaction.itemDate =tv_addDate.text.toString()
-                if(edtDetails.text.toString().isEmpty()){
+                val transaction = Transaction()
+                transaction.itemTitle = edt_add_name.text.toString()
+                transaction.itemDate =tv_add_date.text.toString()
+                if(edt_add_description.text.toString().isEmpty()){
                     transaction.itemDescription = ""
                 } else{
-                    transaction.itemDescription = edtDetails.text.toString()
-                    if(edtPrice.text.isEmpty())
+                    transaction.itemDescription = edt_add_description.text.toString()
+                    if(edt_add_price.text.isEmpty())
                     {
                         transaction.itemPrice = 0.0
                     } else{
-                        transaction.itemPrice = edtPrice.text.toString().toDouble()
+                        transaction.itemPrice = edt_add_price.text.toString().toDouble()
                     }
                 }
                 MainActivity.dbHandler.addTransaction(this,transaction)
                 clearEdits()
-                edtDenumirea.requestFocus()
+                edt_add_name.requestFocus()
             }
         }
 
-        btnCancel.setOnClickListener {
+        btn_cancel.setOnClickListener {
             clearEdits()
             finish()
         }
@@ -60,9 +60,9 @@ class AddItemActivity : AppCompatActivity() {
 
 
     private fun clearEdits(){
-        edtDenumirea.text.clear()
-        edtDetails.text.clear()
-        edtPrice.text.clear()
+        edt_add_name.text.clear()
+        edt_add_description.text.clear()
+        edt_add_price.text.clear()
     }
 
 

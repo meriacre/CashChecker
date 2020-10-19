@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edtDenumirea"
+        android:id="@+id/edt_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textView"
@@ -27,7 +28,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Denumirea:"
+        android:text="@string/title"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,18 +40,21 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
-        android:text="Descriere:"
+        android:text="@string/description"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtDenumirea" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_add_name" />
 
     <EditText
-        android:id="@+id/edtDetails"
+        android:id="@+id/edt_add_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:hint="@string/write_your_description_here"
+        android:inputType="text"
         android:lines="13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,24 +72,24 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
-            android:text="Save"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.519" />
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnSave"
+            app:layout_constraintStart_toEndOf="@+id/btn_save"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,30 +100,34 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Pret:"
+        android:text="@string/price"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_addDate" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_date" />
 
     <EditText
-        android:id="@+id/edtPrice"
+        android:id="@+id/edt_add_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="@string/write_price_here"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/tv_addDate"
+        android:id="@+id/tv_add_date"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:enabled="false"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:enabled="false"
+        android:hint="@string/press_right_button_to_select_date"
+        android:importantForAutofill="no"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -130,18 +138,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Data:"
+        android:text="@string/date"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_add_description" />
 
     <ImageButton
         android:id="@+id/btnCalendar"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_addDate"
-        app:layout_constraintTop_toTopOf="@+id/tv_addDate"
+        android:contentDescription="@string/todo"
+        app:layout_constraintStart_toEndOf="@+id/tv_add_date"
+        app:layout_constraintTop_toTopOf="@+id/tv_add_date"
         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
 

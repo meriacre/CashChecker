@@ -7,26 +7,26 @@
     tools:context=".DisplayActivity">
 
     <TextView
-        android:id="@+id/tvNameDisplay"
+        android:id="@+id/tv_name_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="12dp"
-        android:hint="Transaction Name"
+        android:hint="@string/transaction_name"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
-        android:id="@+id/tvDescriptionDisplay"
+        android:id="@+id/tv_description_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/back"
-        android:hint="Transaction Description"
+        android:hint="@string/transaction_description"
         android:lines="10"
         android:padding="5dp"
         android:textSize="18sp"
@@ -35,12 +35,12 @@
         app:layout_constraintTop_toBottomOf="@+id/DescriptionTV" />
 
     <TextView
-        android:id="@+id/tvPriceDisplay"
+        android:id="@+id/tv_price_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="12dp"
-        android:hint="0"
+        android:hint="@string/_0"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -48,12 +48,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
-        android:id="@+id/tvDateDisplay"
+        android:id="@+id/tv_date_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="12dp"
-        android:text="Date"
+        android:text="@string/_00_11_2222"
         android:textSize="25sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="50dp"
-        android:text="@string/name"
+        android:text="@string/title"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +79,7 @@
         android:textSize="20sp"
         android:text="@string/description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_display" />
 
     <TextView
         android:id="@+id/textView13"
@@ -90,7 +90,7 @@
         android:text="@string/date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_display" />
 
     <TextView
         android:id="@+id/textView14"
@@ -101,18 +101,18 @@
         android:textSize="20sp"
         android:text="@string/price"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDateDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_display" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="$"
+        android:text="@string/dolar"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="25sp"
-        app:layout_constraintStart_toEndOf="@+id/tvPriceDisplay"
-        app:layout_constraintTop_toTopOf="@+id/tvPriceDisplay" />
+        app:layout_constraintStart_toEndOf="@+id/tv_price_display"
+        app:layout_constraintTop_toTopOf="@+id/tv_price_display" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
