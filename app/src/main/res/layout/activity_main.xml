@@ -89,8 +89,9 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="4dp"
             android:onClick="addMoney"
-            android:src="@drawable/ic_baseline_attach_money_24"
+            android:src="@mipmap/ic_total_money"
             app:layout_constraintStart_toEndOf="@+id/edt_total"
             app:layout_constraintTop_toTopOf="@+id/edt_total" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,16 +32,17 @@ class DBHandler(
                 "$COLUMN_TRANSACTIONID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_TRANSACTIONNAME TEXT, " +
                 "$COLUMN_TRANSACTIONDESCRIPTION TEXT, " +
+                "$COLUMN_TRANSACTIONDATE TEXT, " +
                 "$COLUMN_TRANSACTIONPRICE DOUBLE DEFAULT 0)"
         db?.execSQL(CREATE_TRANSACTION_TABLE)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-       if (p1<2)
-       {
-           p0?.execSQL("Alter Table $TRASACTION_TABLE_NAME " +
-           "Add $COLUMN_TRANSACTIONDATE TEXT NULL")
-       }
+//       if (p1<2)
+//       {
+//           p0?.execSQL("Alter Table $TRASACTION_TABLE_NAME " +
+//           "Add $COLUMN_TRANSACTIONDATE TEXT NULL")
+//       }
     }
 
     fun getTransactions(context: Context) : ArrayList<Transaction> {

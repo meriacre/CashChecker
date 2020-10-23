@@ -1,9 +1,13 @@
 package md.merit.strangatorul
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,19 +17,26 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.about_popup.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.lo_add_money.*
 import kotlinx.android.synthetic.main.lo_add_money.view.*
 
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
+        var currencySign: String = "$"
         lateinit var dbHandler: DBHandler
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (SettingsActivity.isInitialized() == true){
+            currencySign = SettingsActivity.finalCurency
+        }
 
         dbHandler = DBHandler(this, null, null, 1)
         viewTransactions()
@@ -44,7 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.resetApp -> {
+            R.id.settings_app -> {
+                startActivity(Intent(this,SettingsActivity::class.java))
+            }
+            R.id.reset_app -> {
                 var alertDialog = android.app.AlertDialog.Builder(this)
                     .setTitle("Warning")
                     .setMessage("Are you sure you want to delete all data?")
@@ -54,6 +68,8 @@ class MainActivity : AppCompatActivity() {
                         } catch (e:Exception){
                             Toast.makeText(this, "Unable to delete data", Toast.LENGTH_SHORT).show()
                         }
+                        edt_total.text = "0"
+                        saveData()
                         val intent = intent
                         finish()
                         startActivity(intent)
@@ -63,15 +79,29 @@ class MainActivity : AppCompatActivity() {
                     .setIcon(R.drawable.ic_baseline_warning_24)
                     .show()
             }
-            R.id.aboutApp -> Toast.makeText(this, "aboutt what?", Toast.LENGTH_SHORT).show()
+            R.id.about_app ->{
+              val mDialog = LayoutInflater.from(this).inflate(R.layout.about_popup, null)
+                val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialog)
+
+                val mAlertDialog = mBuilder.show()
+
+                mAlertDialog.btn_close_popup.setOnClickListener {
+                    mAlertDialog.dismiss()
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
         viewTransactions()
+        saveData2()
         super.onResume()
         edt_rest.setText(returnRest().toString())
+        if (SettingsActivity.isInitialized() == true){
+            currencySign = SettingsActivity.finalCurency
+        }
     }
 
     private fun viewTransactions() {
@@ -144,7 +174,24 @@ class MainActivity : AppCompatActivity() {
     private fun loadData(){
         val sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val savedString = sharedPref.getString("STRING_KEY",null)
+        val savedString2 = sharedPref.getString("STRING_KEY2",null)
         edt_total.text = savedString
+        if (savedString2 != null) {
+            currencySign = savedString2
+        }
+    }
+
+    private fun saveData2(){
+        val insertedValue2 = currencySign
+
+        val sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.apply(){
+            putString("STRING_KEY2", insertedValue2)
+        }.apply()
+
+        //Toast.makeText(this, "Your new currency are saved!", Toast.LENGTH_SHORT).show()
     }
 
 }
+

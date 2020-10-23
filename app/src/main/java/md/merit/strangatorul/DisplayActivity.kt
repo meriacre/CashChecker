@@ -26,6 +26,7 @@ class DisplayActivity : AppCompatActivity() {
         tv_description_display.text = aDescription
         tv_price_display.text = aPrice.toString()
         tv_date_display.text = aDate.toString()
+        tv_currency_display.text = MainActivity.currencySign
     }
 
 }

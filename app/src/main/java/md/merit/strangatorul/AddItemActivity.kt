@@ -17,7 +17,8 @@ class AddItemActivity : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-
+        val correctMonthDefault = month+1
+        tv_add_date.setText(""+ day +"/" + correctMonthDefault + "/" + year )
         btnCalendar.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
                 var correctMonth = mMonth + 1
@@ -34,17 +35,12 @@ class AddItemActivity : AppCompatActivity() {
                 val transaction = Transaction()
                 transaction.itemTitle = edt_add_name.text.toString()
                 transaction.itemDate =tv_add_date.text.toString()
-                if(edt_add_description.text.toString().isEmpty()){
-                    transaction.itemDescription = ""
-                } else{
-                    transaction.itemDescription = edt_add_description.text.toString()
-                    if(edt_add_price.text.isEmpty())
-                    {
-                        transaction.itemPrice = 0.0
-                    } else{
-                        transaction.itemPrice = edt_add_price.text.toString().toDouble()
-                    }
-                }
+                transaction.itemDescription = edt_add_description.text.toString()
+               if(edt_add_price.text.isEmpty()){
+                   transaction.itemPrice= 0.0
+               }else {
+                   transaction.itemPrice = edt_add_price.text.toString().toDouble()
+               }
                 MainActivity.dbHandler.addTransaction(this,transaction)
                 clearEdits()
                 edt_add_name.requestFocus()
@@ -56,6 +52,7 @@ class AddItemActivity : AppCompatActivity() {
             finish()
         }
 
+        tv_curency_display.text = MainActivity.currencySign
     }
 
 
