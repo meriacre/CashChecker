@@ -32,7 +32,7 @@
     <string name="transaction_description">This transaction description is empty.</string>
     <string name="_0">0</string>
     <string name="dolar">$</string>
-    <string name="write_here_your_total_cash">Write here your total cash!</string>
+    <string name="write_here_your_total_cash">0.0</string>
     <string name="reset">Reset</string>
     <string name="about">About</string>
 </resources>

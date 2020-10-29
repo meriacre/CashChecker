@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:paddingLeft="8dp"
         android:autofillHints=""
         android:hint="@string/write_here_your_total_cash"
         android:inputType="numberDecimal" />

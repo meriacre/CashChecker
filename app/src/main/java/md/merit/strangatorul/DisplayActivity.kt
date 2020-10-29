@@ -6,7 +6,16 @@ import androidx.appcompat.app.ActionBar
 import kotlinx.android.synthetic.main.activity_display.*
 
 class DisplayActivity : AppCompatActivity() {
+    private lateinit var settingsSaveData: SettingsSaveData
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        settingsSaveData = SettingsSaveData(this)
+        if (settingsSaveData.loadDarkMode() == true){
+            setTheme(R.style.DarkTheme)
+        }else{
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
 

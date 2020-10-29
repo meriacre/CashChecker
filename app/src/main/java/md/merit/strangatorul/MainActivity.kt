@@ -1,11 +1,8 @@
 package md.merit.strangatorul
 
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -19,18 +16,26 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.about_popup.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.lo_add_money.*
 import kotlinx.android.synthetic.main.lo_add_money.view.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var settingsSaveData: SettingsSaveData
     companion object {
         var currencySign: String = "$"
         lateinit var dbHandler: DBHandler
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        settingsSaveData = SettingsSaveData(this)
+        if (settingsSaveData.loadDarkMode() == true){
+            setTheme(R.style.DarkTheme)
+        }else{
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -52,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu, menu)
         return true
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
@@ -81,8 +88,13 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.about_app ->{
               val mDialog = LayoutInflater.from(this).inflate(R.layout.about_popup, null)
-                val mBuilder = AlertDialog.Builder(this)
-                    .setView(mDialog)
+                val mBuilder:AlertDialog.Builder
+                mBuilder = if (settingsSaveData.loadDarkMode() == true){
+                    AlertDialog.Builder(this,R.style.DarkTheme).setView(mDialog)
+                } else{
+                    AlertDialog.Builder(this, R.style.AppTheme).setView(mDialog)
+                }
+
 
                 val mAlertDialog = mBuilder.show()
 
@@ -129,19 +141,20 @@ class MainActivity : AppCompatActivity() {
             totalMoney = 0.0
         else
             totalMoney = edt_total.text.toString().toDouble()
-        return totalMoney - sumTransactions
+        return BigDecimal(totalMoney - sumTransactions).setScale(2, RoundingMode.HALF_EVEN).toDouble()
     }
 
     fun addMoney(view: View) {
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, R.style.MyDialogTheme)
         val inflater = layoutInflater
         builder.setTitle("Please write your money amount!")
         val dialogLayout = inflater.inflate(R.layout.lo_add_money, null)
         dialogLayout.findViewById<EditText>(R.id.edt_total_money)
-
+       // dialogLayout.setBackgroundColor(resources.getColor(R.color.colorBackground))
         builder.setView(dialogLayout)
         builder.setIcon(R.drawable.ic_baseline_attach_money_24)
         builder.setPositiveButton("OK") { dialogInterface, i ->
+
             try {
                 edt_total.text = dialogLayout.edt_total_money.text.toString()
                 saveData()
@@ -152,6 +165,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Data can not be saved!", Toast.LENGTH_SHORT).show()
             }
         }
+
         builder.setNegativeButton("Cancel") { dialogInterface, i ->
 
         }

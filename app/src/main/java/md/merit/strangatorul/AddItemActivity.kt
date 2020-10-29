@@ -8,8 +8,15 @@ import kotlinx.android.synthetic.main.add_item.*
 import java.util.*
 
 class AddItemActivity : AppCompatActivity() {
+private lateinit var settingsSaveData:SettingsSaveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        settingsSaveData = SettingsSaveData(this)
+        if (settingsSaveData.loadDarkMode() == true){
+            setTheme(R.style.DarkTheme)
+        }else{
+            setTheme(R.style.AppTheme)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_item)
 

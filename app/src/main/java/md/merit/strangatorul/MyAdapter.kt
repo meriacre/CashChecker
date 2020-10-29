@@ -54,7 +54,7 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<Transaction
         holder.btnDelete.setOnClickListener {
             val itemName = curentItem.itemTitle
 
-            var alertDialog = AlertDialog.Builder(context)
+            var alertDialog = AlertDialog.Builder(context, R.style.MyDialogTheme)
                 .setTitle("Warning")
                 .setMessage("Are you sure you want to delete $itemName")
                 .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
@@ -103,7 +103,8 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<Transaction
                 }, year, month, day)
                 dpd.show()
             }
-            val builder = AlertDialog.Builder(context)
+
+            val builder = AlertDialog.Builder(context,R.style.MyDialogTheme)
                 .setTitle("Update transaction info")
                 .setView(view)
                 .setPositiveButton("Update", DialogInterface.OnClickListener { dialog, which ->
