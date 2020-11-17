@@ -10,12 +10,13 @@ import kotlin.Exception
 
 class DBHandler(
     context: Context,
-    name : String?,
-    factory : SQLiteDatabase.CursorFactory?,
-    version : Int
+    name: String?,
+    factory: SQLiteDatabase.CursorFactory?,
+    version: Int
 ) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
-    companion object{
+    companion object {
+
         private val DATABASE_NAME = "MyData.db"
         private val DATABASE_VERSION = 2
 
@@ -45,35 +46,81 @@ class DBHandler(
 //       }
     }
 
-    fun getTransactions(context: Context) : ArrayList<Transaction> {
+    fun getTransactions(context: Context): ArrayList<Transaction> {
         val qry = "Select * From $TRASACTION_TABLE_NAME"
         val db = this.readableDatabase
         val cursor = db.rawQuery(qry, null)
         val transactions = ArrayList<Transaction>()
 
         if (cursor.count == 0)
-            Toast.makeText(context, "No records found", Toast.LENGTH_SHORT).show() else{
+            Toast.makeText(context, "No records found", Toast.LENGTH_SHORT).show() else {
             cursor.moveToFirst()
-            while (!cursor.isAfterLast){
+            while (!cursor.isAfterLast) {
                 val transaction = Transaction()
                 transaction.itemId = cursor.getInt(cursor.getColumnIndex(COLUMN_TRANSACTIONID))
-                transaction.itemTitle = cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONNAME))
-                transaction.itemDescription = cursor.getString(cursor.getColumnIndex(
-                    COLUMN_TRANSACTIONDESCRIPTION))
-                transaction.itemPrice = cursor.getDouble(cursor.getColumnIndex(
-                    COLUMN_TRANSACTIONPRICE))
-                transaction.itemDate = cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONDATE))
+                transaction.itemTitle =
+                    cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONNAME))
+                transaction.itemDescription = cursor.getString(
+                    cursor.getColumnIndex(
+                        COLUMN_TRANSACTIONDESCRIPTION
+                    )
+                )
+                transaction.itemPrice = cursor.getDouble(
+                    cursor.getColumnIndex(
+                        COLUMN_TRANSACTIONPRICE
+                    )
+                )
+                transaction.itemDate =
+                    cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONDATE))
                 transactions.add(transaction)
                 cursor.moveToNext()
             }
-            Toast.makeText(context, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${cursor.count.toString()} Records Found", Toast.LENGTH_SHORT)
+                .show()
         }
         cursor.close()
         db.close()
         return transactions
     }
 
-    fun addTransaction(context: Context, item: Transaction){
+    fun getTransactionsPdf(context: Context, date1: String, date2: String): ArrayList<Transaction> {
+        val qry =
+            "SELECT * FROM $TRASACTION_TABLE_NAME WHERE $COLUMN_TRANSACTIONDATE BETWEEN DATE('$date1') AND DATE('$date2')"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(qry, null)
+        val transactions = ArrayList<Transaction>()
+
+        if (cursor.count == 0)
+        //Toast.makeText(context, "No records found", Toast.LENGTH_SHORT).show()
+        else {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                val transaction = Transaction()
+                transaction.itemId = cursor.getInt(cursor.getColumnIndex(COLUMN_TRANSACTIONID))
+                transaction.itemTitle =
+                    cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONNAME))
+                transaction.itemDescription = cursor.getString(
+                    cursor.getColumnIndex(
+                        COLUMN_TRANSACTIONDESCRIPTION
+                    )
+                )
+                transaction.itemPrice = cursor.getDouble(
+                    cursor.getColumnIndex(
+                        COLUMN_TRANSACTIONPRICE
+                    )
+                )
+                transaction.itemDate =
+                    cursor.getString(cursor.getColumnIndex(COLUMN_TRANSACTIONDATE))
+                transactions.add(transaction)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        db.close()
+        return transactions
+    }
+
+    fun addTransaction(context: Context, item: Transaction) {
         val values = ContentValues()
         values.put(COLUMN_TRANSACTIONNAME, item.itemTitle)
         values.put(COLUMN_TRANSACTIONDESCRIPTION, item.itemDescription)
@@ -83,27 +130,33 @@ class DBHandler(
         try {
             db.insert(TRASACTION_TABLE_NAME, null, values)
             Toast.makeText(context, "Transaction Added!", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
         }
         db.close()
     }
 
-    fun deleteTransaction(itemNumber : Int): Boolean {
-    val qry = "Delete From $TRASACTION_TABLE_NAME where $COLUMN_TRANSACTIONID = $itemNumber"
+    fun deleteTransaction(itemNumber: Int): Boolean {
+        val qry = "Delete From $TRASACTION_TABLE_NAME where $COLUMN_TRANSACTIONID = $itemNumber"
         val db = this.writableDatabase
         var result = false
         try {
             val cursor = db.execSQL(qry)
             result = true
-            } catch (e : Exception){
+        } catch (e: Exception) {
             Log.e(ContentValues.TAG, "Error deleting")
         }
         db.close()
         return result
     }
 
-    fun updateTransaction(id: String, transactionName: String, transactionDescription: String, transactionPrice: String, transactionDate: String) : Boolean{
+    fun updateTransaction(
+        id: String,
+        transactionName: String,
+        transactionDescription: String,
+        transactionPrice: String,
+        transactionDate: String
+    ): Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
         var result = false
@@ -112,9 +165,14 @@ class DBHandler(
         contentValues.put(COLUMN_TRANSACTIONPRICE, transactionPrice.toDouble())
         contentValues.put(COLUMN_TRANSACTIONDATE, transactionDate)
         try {
-            db.update(TRASACTION_TABLE_NAME, contentValues, "$COLUMN_TRANSACTIONID = ?", arrayOf(id))
+            db.update(
+                TRASACTION_TABLE_NAME,
+                contentValues,
+                "$COLUMN_TRANSACTIONID = ?",
+                arrayOf(id)
+            )
             result = true
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Log.e(ContentValues.TAG, "Error Updating")
             result = false
         }
@@ -126,18 +184,18 @@ class DBHandler(
         val db = this.writableDatabase
         var result: Double = 0.0
         val cursor = db.rawQuery(qry, null)
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             result = cursor.getDouble(0)
         }
         while (cursor.moveToNext())
             return result
         cursor.close()
         db.close()
-    return result
+        return result
     }
 
-    fun deleteAllData(){
-       val db = this.writableDatabase
+    fun deleteAllData() {
+        val db = this.writableDatabase
         db.execSQL("Delete From $TRASACTION_TABLE_NAME")
     }
 }

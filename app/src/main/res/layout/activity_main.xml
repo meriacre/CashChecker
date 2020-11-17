@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -41,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textColor="?attr/Text_Color"
             android:text="@string/total"
+            android:textColor="?attr/Text_Color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -65,12 +64,12 @@
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:backgroundTint="#7EC629"
-            android:gravity="center_vertical"
             android:fontFamily="serif-monospace"
+            android:gravity="center_vertical"
             android:text="@string/_0"
+            android:textColor="?attr/Text_Color"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="?attr/Text_Color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toTopOf="parent" />
@@ -96,8 +95,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="4dp"
-            android:onClick="addMoney"
             android:background="?attr/backgroundColor"
+            android:onClick="addMoney"
             android:src="@mipmap/ic_total_money"
             app:layout_constraintStart_toEndOf="@+id/edt_total"
             app:layout_constraintTop_toTopOf="@+id/edt_total" />

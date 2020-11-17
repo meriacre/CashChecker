@@ -10,9 +10,9 @@ class DisplayActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         settingsSaveData = SettingsSaveData(this)
-        if (settingsSaveData.loadDarkMode() == true){
+        if (settingsSaveData.loadDarkMode() == true) {
             setTheme(R.style.DarkTheme)
-        }else{
+        } else {
             setTheme(R.style.AppTheme)
         }
 

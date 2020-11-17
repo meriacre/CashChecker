@@ -26,18 +26,17 @@
             android:layout_marginTop="72dp"
             android:text="Currency:"
             android:textColor="?attr/Text_Color"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/spinner_currency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="64dp"
             android:layout_marginStart="150dp"
-            android:gravity="center"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
             android:backgroundTint="?attr/Text_Color"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="parent">
 
         </Spinner>

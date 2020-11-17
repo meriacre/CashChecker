@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.add_item.*
 import kotlinx.android.synthetic.main.example_item.view.*
 import kotlinx.android.synthetic.main.lo_transaction_update.view.*
 import java.util.*
@@ -24,6 +25,7 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<Transaction
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val item = LayoutInflater.from(parent.context).inflate(R.layout.example_item, parent, false)
         return MyViewHolder(item)
+
     }
 
 
@@ -91,20 +93,34 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<Transaction
             txtDate.text = curentItem.itemDate
 
 
-
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
             view.btn_calendarEdit.setOnClickListener {
-                val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
-                    var correctMonth = mMonth + 1
-                    view.edt_date_update.setText(""+ mDay +"/" + correctMonth + "/" + mYear)
-                }, year, month, day)
+                val dpd = DatePickerDialog(
+                    context,
+                    DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                        var correctMonth = mMonth + 1
+                        if (mDay < 10 && correctMonth > 9) {
+                            view.edt_date_update.setText("" + mYear + "-" + correctMonth + "-0" + mDay)
+                        } else if (mDay > 10 && correctMonth < 10) {
+                            view.edt_date_update.setText("" + mYear + "-0" + correctMonth + "-" + mDay)
+                        } else if (mDay < 10 && correctMonth < 10) {
+                            view.edt_date_update.setText("" + mYear + "-0" + correctMonth + "-0" + mDay)
+                        } else {
+                            view.edt_date_update.setText("" + mYear + "-" + correctMonth + "-" + mDay)
+                        }
+                    },
+                    year,
+                    month,
+                    day
+                )
                 dpd.show()
+                dpd.datePicker.maxDate = System.currentTimeMillis()
             }
 
-            val builder = AlertDialog.Builder(context,R.style.MyDialogTheme)
+            val builder = AlertDialog.Builder(context, R.style.MyDialogTheme)
                 .setTitle("Update transaction info")
                 .setView(view)
                 .setPositiveButton("Update", DialogInterface.OnClickListener { dialog, which ->
@@ -117,8 +133,10 @@ class MyAdapter(context: Context, private val exampleList: ArrayList<Transaction
                     )
                     if (isUpdate == true) {
                         exampleList[position].itemTitle = view.edt_name_update.text.toString()
-                        exampleList[position].itemDescription = view.edt_description_update.text.toString()
-                        exampleList[position].itemPrice = view.edt_price_update.text.toString().toDouble()
+                        exampleList[position].itemDescription =
+                            view.edt_description_update.text.toString()
+                        exampleList[position].itemPrice =
+                            view.edt_price_update.text.toString().toDouble()
                         exampleList[position].itemDate = view.edt_date_update.text.toString()
                         notifyDataSetChanged()
                         Toast.makeText(context, "Updated succesfully!", Toast.LENGTH_SHORT).show()

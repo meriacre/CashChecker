@@ -3,11 +3,12 @@ package md.merit.strangatorul
 import android.content.Context
 import android.content.SharedPreferences
 
-class SettingsSaveData(context:Context) {
+class SettingsSaveData(context: Context) {
 
-    private var sharedPreferences: SharedPreferences =context.getSharedPreferences("file", Context.MODE_PRIVATE)
+    private var sharedPreferences: SharedPreferences =
+        context.getSharedPreferences("file", Context.MODE_PRIVATE)
 
-    fun setDarkMode(state: Boolean){
+    fun setDarkMode(state: Boolean) {
         val editor = sharedPreferences.edit()
         editor.putBoolean("Dark", state)
         editor.apply()

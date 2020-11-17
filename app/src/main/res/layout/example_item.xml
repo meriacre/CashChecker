@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="?attr/backgroundColor"
@@ -10,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
-        android:padding="8dp"
-        android:background="?attr/card_background">
+        android:background="?attr/card_background"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/tv_id"
@@ -21,8 +20,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
-            android:textColor="?attr/Text_Color"
             android:text="@string/_100"
+            android:textColor="?attr/Text_Color"
             android:textSize="20sp"
             android:textStyle="italic" />
 
@@ -63,10 +62,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="3dp"
             android:layout_toStartOf="@+id/btn_delete"
-            android:backgroundTint="#FFFFFF"
-            android:contentDescription="@string/todo"
             android:background="?attr/card_background"
+            android:backgroundTint="#FFFFFF"
             android:backgroundTintMode="?attr/card_background"
+            android:contentDescription="@string/todo"
             android:src="@drawable/ic_edit" />
 
         <ImageButton
@@ -77,10 +76,10 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="1dp"
-            android:backgroundTint="#FFFFFF"
-            android:contentDescription="@string/todo"
             android:background="?attr/card_background"
+            android:backgroundTint="#FFFFFF"
             android:backgroundTintMode="?attr/card_background"
+            android:contentDescription="@string/todo"
             android:src="@drawable/ic_delete" />
 
         <TextView

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayActivity"
-    android:background="?attr/backgroundColor">
+    android:background="?attr/backgroundColor"
+    tools:context=".DisplayActivity">
 
     <TextView
         android:id="@+id/tv_name_display"
@@ -24,13 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="25dp"
 
         android:hint="@string/transaction_description"
-        android:textColor="?attr/Text_Color"
         android:lines="10"
         android:padding="5dp"
+        android:textColor="?attr/Text_Color"
         android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,9 +80,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="50dp"
-        android:textSize="20sp"
         android:text="@string/description"
         android:textColor="?attr/Text_Color"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_display" />
 
@@ -104,9 +104,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="50dp"
-        android:textSize="20sp"
         android:text="@string/price"
         android:textColor="?attr/Text_Color"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date_display" />
 

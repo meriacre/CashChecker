@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lo_popup"
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="?attr/card_background"
-    >
+    android:background="?attr/card_background">
 
     <TextView
         android:id="@+id/tv_about"
@@ -16,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:text="CASH CHECKER"
-        android:textSize="40sp"/>
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tv_about_text"
@@ -30,6 +28,8 @@
         android:text="This application was made for people that prefer using cash instead of credit cards. Here you can:
 \n · Add your amount of cash you are willing to spend;
 \n · Add every cash flow;
+\n · Create Pdf reports with your expenses for period you want;
+\n · Share your reports with external apps
 \n · Check your expenses and the rest of the money from your wallet
 \n · Make sure everything coincides and
  enjoy the app."

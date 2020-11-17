@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:id="@+id/card_pdf"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginStart="12dp"-->
+<!--    android:layout_marginTop="12dp"-->
+<!--    android:layout_marginEnd="12dp"-->
+<!--    android:elevation="12dp"-->
+<!--    android:backgroundTint="?attr/backgroundColor"-->
+<!--    android:layout_marginBottom="12dp">-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="158dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp"
+
+    android:background="@drawable/pdf_file_image2"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_pdf_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="data"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_pdf_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="ora"
+        android:textAlignment="center"
+        android:textSize="25sp" />
+</LinearLayout><!--</androidx.cardview.widget.CardView>-->

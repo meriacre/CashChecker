@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.add_item.*
 
 class SettingsActivity : AppCompatActivity() {
     companion object {
-        lateinit var finalCurency:String
+        lateinit var finalCurency: String
 
         private lateinit var settingSaveData: SettingsSaveData
         fun isInitialized(): Boolean {
@@ -25,9 +25,9 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         settingSaveData = SettingsSaveData(this)
-        if (settingSaveData.loadDarkMode() == true){
+        if (settingSaveData.loadDarkMode() == true) {
             setTheme(R.style.DarkTheme)
-        }else{
+        } else {
             setTheme(R.style.AppTheme)
         }
 
@@ -41,7 +41,7 @@ class SettingsActivity : AppCompatActivity() {
 
         loadData()
 
-        if(settingSaveData.loadDarkMode() == true){
+        if (settingSaveData.loadDarkMode() == true) {
             switch_theme.isChecked = true
         }
 
@@ -49,32 +49,34 @@ class SettingsActivity : AppCompatActivity() {
             if (isChecked) {
                 settingSaveData.setDarkMode(true)
                 restartApplication()
-            }else
+            } else {
                 settingSaveData.setDarkMode(false)
                 restartApplication()
+            }
         }
 
-        var optionCurency : Spinner = findViewById(R.id.spinner_currency)
-        val optionsCurency = arrayOf("$","€","MDL", "RON")
-        optionCurency.adapter = ArrayAdapter<String>(this, R.layout.spinner_item,optionsCurency)
+        var optionCurency: Spinner = findViewById(R.id.spinner_currency)
+        val optionsCurency = arrayOf("$", "€", "MDL", "RON")
+        optionCurency.adapter = ArrayAdapter<String>(this, R.layout.spinner_item, optionsCurency)
 
 
-        var val1=0
-        if(isInitialized()){
-        when (finalCurency) {
-            optionsCurency[1] -> {
-                val1 = 1
+        var val1 = 0
+        if (isInitialized()) {
+            when (finalCurency) {
+                optionsCurency[1] -> {
+                    val1 = 1
+                }
+                optionsCurency[2] -> {
+                    val1 = 2
+                }
+                optionsCurency[3] -> {
+                    val1 = 3
+                }
             }
-            optionsCurency[2] -> {
-                val1 = 2
-            }
-            optionsCurency[3] -> {
-                val1 = 3
-            }
-        }}
+        }
 
         optionCurency.setSelection(val1)
-        optionCurency.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
+        optionCurency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 finalCurency = optionsCurency[p2]
                 saveData()
@@ -85,24 +87,24 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    fun saveData(){
+    fun saveData() {
         val insertedValue = finalCurency
         val sharedPref = getSharedPreferences("sharedPrefCurrency", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.apply(){
+        editor.apply() {
             putString("STRING_KEY2", insertedValue)
         }.apply()
 
-     //   Toast.makeText(this, "Your currency is $finalCurency!", Toast.LENGTH_SHORT).show()
+        //   Toast.makeText(this, "Your currency is $finalCurency!", Toast.LENGTH_SHORT).show()
     }
 
-     private fun loadData() {
+    private fun loadData() {
         val sharedPref = getSharedPreferences("sharedPrefCurrency", Context.MODE_PRIVATE)
-        val savedString = sharedPref.getString("STRING_KEY2",null)
-            finalCurency = savedString.toString()
+        val savedString = sharedPref.getString("STRING_KEY2", null)
+        finalCurency = savedString.toString()
     }
 
-    private fun restartApplication(){
+    private fun restartApplication() {
         val i = Intent(applicationContext, SettingsActivity::class.java)
         startActivity(i)
         finish()
