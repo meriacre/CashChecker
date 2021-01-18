@@ -61,7 +61,7 @@ class ReportsActivity : AppCompatActivity() {
             tv_date1.setText("" + year + "-" + correctMonthDefault + "-" + "0" + day)
             date1 = tv_date1.text.toString()
         } else if (correctMonthDefault < 10 && day > 9) {
-            tv_date1.setText("" + year + "-0" + correctMonthDefault + "-" + "0" + day)
+            tv_date1.setText("" + year + "-0" + correctMonthDefault + "-" + day)
             date1 = tv_date1.text.toString()
         } else if (day < 10 && correctMonthDefault < 10) {
             tv_date1.setText("" + year + "-0" + correctMonthDefault + "-0" + day)
@@ -102,7 +102,7 @@ class ReportsActivity : AppCompatActivity() {
             tv_date2.setText("" + year + "-" + correctMonthDefault + "-" + "0" + day)
             date2 = tv_date2.text.toString()
         } else if (correctMonthDefault < 10 && day > 9) {
-            tv_date2.setText("" + year + "-0" + correctMonthDefault + "-" + "0" + day)
+            tv_date2.setText("" + year + "-0" + correctMonthDefault + "-" + day)
             date2 = tv_date2.text.toString()
         } else if (day < 10 && correctMonthDefault < 10) {
             tv_date2.setText("" + year + "-0" + correctMonthDefault + "-0" + day)
